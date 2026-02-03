@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/Adapters/" />
+  <Project Path="DriverIQ.Test.Unit/DriverIQ.Test.Unit.csproj" Id="5681c9ed-6195-44aa-92f1-3a36e897675e" />
+  <Project Path="DriverIQ/DriverIQ.csproj" Id="ab9fb12b-4e54-4002-83ee-b04ae7fafd4e" />
+</Solution>
