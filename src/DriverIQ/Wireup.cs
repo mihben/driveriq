@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DriverIQ.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DriverIQ
 {
@@ -6,7 +7,7 @@ namespace DriverIQ
     {
         public static void ConfigureServices(this IServiceCollection services)
         {
-
+            services.AddSingleton<MainViewModel>();
         }
     }
 }

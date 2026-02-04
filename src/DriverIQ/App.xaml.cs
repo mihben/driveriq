@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace DriverIQ
@@ -15,6 +16,14 @@ namespace DriverIQ
             var services = new ServiceCollection();
 
             services.AddSingleton<MainWindow>();
+
+            services.AddSingleton<IConfiguration>(_ =>
+            {
+                return new ConfigurationBuilder()
+                                .AddJsonFile("Appsettings.json")
+                                .AddJsonFile($"Appsettings.{Environment.GetEnvironmentVariable("Environment")}.json", optional: true)
+                                .Build();
+            });
 
             services.ConfigureServices();
 

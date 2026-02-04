@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DriverIQ": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Environment": "Development"
+      }
+    }
+  }
+}
