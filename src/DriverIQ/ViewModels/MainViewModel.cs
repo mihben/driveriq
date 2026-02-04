@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace DriverIQ.ViewModels
 {
@@ -6,9 +7,10 @@ namespace DriverIQ.ViewModels
     {
         public string Environment { get; set; } = null!;
 
-        public MainViewModel(IConfiguration configuration)
+        public MainViewModel(IConfiguration configuration, ILogger<MainViewModel> logger)
         {
             Environment = configuration.GetSection("Environment").Value!;
+            logger.LogDebug("Application has been started");
         }
     }
 }

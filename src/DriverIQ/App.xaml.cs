@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Settings.Configuration;
 using System.Windows;
 
 namespace DriverIQ
@@ -17,13 +20,17 @@ namespace DriverIQ
 
             services.AddSingleton<MainWindow>();
 
-            services.AddSingleton<IConfiguration>(_ =>
-            {
-                return new ConfigurationBuilder()
+            var configuration = new ConfigurationBuilder()
                                 .AddJsonFile("Appsettings.json")
                                 .AddJsonFile($"Appsettings.{Environment.GetEnvironmentVariable("Environment")}.json", optional: true)
                                 .Build();
-            });
+            services.AddSingleton<IConfiguration>(configuration);
+
+            services.AddLogging(builder => builder.AddSerilog(new LoggerConfiguration()
+                                                                    .WriteTo
+                                                                        .EventLog(source: "DriverIQ", manageEventSource: true)
+                                                                    .ReadFrom
+                                                                        .Configuration(configuration, new ConfigurationReaderOptions { SectionName = "Logging" }).CreateLogger()));
 
             services.ConfigureServices();
 
