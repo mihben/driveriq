@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace DriverIQ
@@ -9,6 +8,20 @@ namespace DriverIQ
     /// </summary>
     public partial class App : Application
     {
+        private IServiceProvider _serviceProvider = null!;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var services = new ServiceCollection();
+
+            services.AddSingleton<MainWindow>();
+
+            services.ConfigureServices();
+
+            _serviceProvider = services.BuildServiceProvider();
+
+            _serviceProvider.GetRequiredService<MainWindow>().Show();
+        }
     }
 
 }
